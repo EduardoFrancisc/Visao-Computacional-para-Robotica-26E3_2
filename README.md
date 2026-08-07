@@ -1,1 +1,1 @@
-# Vis-o-Computacional-para-Rob-tica-26E3_2-
+# Visão Computacional para Robótica [26E3_2]
