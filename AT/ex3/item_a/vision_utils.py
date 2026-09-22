@@ -70,16 +70,20 @@ def draw_scene(frame_idx):
     w, h = VIDEO_SIZE
     frame = np.full((h, w, 3), (35, 40, 45), dtype=np.uint8)
 
+    # céu / fundo
     cv2.rectangle(frame, (0, 0), (w, 150), (80, 100, 120), -1)
+    # pista
     cv2.rectangle(frame, (0, 150), (w, h), (55, 55, 55), -1)
+    # calçadas
     cv2.rectangle(frame, (0, 150), (w, 205), (90, 90, 85), -1)
     cv2.rectangle(frame, (0, 440), (w, h), (90, 90, 85), -1)
-
+    # faixas
     for x in range(-100, w + 100, 160):
         cv2.line(frame, (x + frame_idx*3 % 160, 300), (x + 70 + frame_idx*3 % 160, 300), (220, 220, 220), 4)
     cv2.line(frame, (0, 270), (w, 270), (180, 180, 180), 1)
     cv2.line(frame, (0, 365), (w, 365), (180, 180, 180), 1)
 
+    # prédios simplificados
     for i, x in enumerate(range(20, w, 115)):
         height = 60 + (i % 4) * 20
         cv2.rectangle(frame, (x, 30), (x+65, 150), (70+i*6 % 60, 75, 82), -1)
@@ -87,6 +91,7 @@ def draw_scene(frame_idx):
             for wy in range(45, 130, 25):
                 cv2.rectangle(frame, (wx, wy), (wx+8, wy+10), (160,180,190), -1)
 
+    # desenha objetos como formas simples
     for obj in synthetic_objects(frame_idx):
         x1, y1, x2, y2 = map(int, obj["bbox"])
         color = COLORS[obj["cls"]]
